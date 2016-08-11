@@ -2,7 +2,10 @@
 execute pathogen#infect()
 
 " Use Vim settings, rather then Vi settings (much better!).
-set nocompatible
+" set nocompatible"
+
+" Set wrap to things that make sense"
+set wrap linebreak nolist
 
 " Set background type"
 set background=dark
@@ -16,9 +19,6 @@ colorscheme PaperColor
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-
-" Disable mouse "
-set mouse=
 
 " showmatch: Show the matching bracket for the last ')'?
 set showmatch
@@ -49,6 +49,9 @@ let g:gitgutter_max_signs = 10000
 " Change line number color
 " (by default gitgutter uses same color as LineNr)
 highlight LineNr ctermbg=235
+
+" set number"
+set number
 
 "tab config"
 set ts=4
@@ -87,12 +90,8 @@ autocmd FileType python,javascript,ruby,c,cpp,java,php autocmd BufWritePre <buff
 map - <C-W>-
 map = <C-W>+
 
-" Make tab in v mode work like I think it should (keep highlighting):
-vmap <tab> >gv
-vmap <s-tab> <gv
-
-nnoremap <Leader>b :bp<CR>
-nnoremap <Leader>f :bn<CR>
+" nnoremap <Leader>b :bp<CR>"
+" nnoremap <Leader>f :bn<CR>"
 
 " Makes Ctrl-P plugin ignore .git and everything on .gitignore "
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -103,3 +102,14 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 "   j - after opening, jump to the first opened tab or window.
 " Source: http://stackoverflow.com/questions/33315406/open-all-selected-files-as-hidden-buffer
 let g:ctrlp_open_multiple_files = 'ij'
+
+" For some reason home and end keys are not mapping properly."
+" Home key"
+imap <esc>OH <esc>0i
+cmap <esc>OH <home>
+nmap <esc>OH 0
+" End key"
+nmap <esc>OF $
+imap <esc>OF <esc>$a
+cmap <esc>OF <end>
+
