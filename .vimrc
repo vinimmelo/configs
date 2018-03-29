@@ -113,3 +113,5 @@ nmap <esc>OF $
 imap <esc>OF <esc>$a
 cmap <esc>OF <end>
 
+" Required to make highlight work for JSX with pure JS
+let g:jsx_ext_required = 0
