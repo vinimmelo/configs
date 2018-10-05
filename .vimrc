@@ -60,6 +60,8 @@ set softtabstop=4
 
 " 4 spaces for indenting
 set shiftwidth=4
+set autoindent
+set cindent
 
 "Disable autoindentation"
 set noai
