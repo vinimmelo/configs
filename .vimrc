@@ -4,14 +4,14 @@ execute pathogen#infect()
 " Use Vim settings, rather then Vi settings (much better!).
 " set nocompatible"
 
-"Set incremental search
-set incsearch
-
 " Set wrap to things that make sense"
 set wrap linebreak nolist
 
 " Set background type"
 set background=dark
+
+"incremental search
+set incsearch
 
 "color scheme"
 " colorscheme elflord
@@ -121,3 +121,4 @@ cmap <esc>OF <end>
 
 " Required to make highlight work for JSX with pure JS
 let g:jsx_ext_required = 0
+let g:syntastic_java_checkers = []
