@@ -4,6 +4,9 @@ execute pathogen#infect()
 " Use Vim settings, rather then Vi settings (much better!).
 " set nocompatible"
 
+"Set incremental search
+set incsearch
+
 " Set wrap to things that make sense"
 set wrap linebreak nolist
 
@@ -68,6 +71,7 @@ set noai
 
 " Enable filetype plugins "
 filetype plugin on
+filetype plugin indent on
 
 " Disable preview code when using omni complete"
 set completeopt=menu
