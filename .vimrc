@@ -13,6 +13,9 @@ set background=dark
 "incremental search
 set incsearch
 
+"search highlighted, all ocurrences
+set hlsearch
+
 "color scheme"
 " colorscheme elflord
 " colorscheme delek
@@ -57,12 +60,12 @@ highlight LineNr ctermbg=235
 set number
 
 "tab config"
-set ts=4
+set ts=2
 set expandtab
-set softtabstop=4
+set softtabstop=2
 
 " 4 spaces for indenting
-set shiftwidth=4
+set shiftwidth=2
 set autoindent
 set cindent
 
