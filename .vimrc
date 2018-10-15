@@ -4,9 +4,6 @@ execute pathogen#infect()
 " Use Vim settings, rather then Vi settings (much better!).
 " set nocompatible"
 
-"Set incremental search
-set incsearch
-
 " Set wrap to things that make sense"
 set wrap linebreak nolist
 
@@ -25,6 +22,13 @@ set backspace=indent,eol,start
 
 " showmatch: Show the matching bracket for the last ')'?
 set showmatch
+
+"highlight search
+set hlsearch
+
+"incremental search
+set incsearch
+
 
 " highlight strings inside C comments
 let c_comment_strings=1
