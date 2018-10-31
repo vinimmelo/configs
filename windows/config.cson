@@ -1,0 +1,26 @@
+"*":
+  "atom-clock":
+    dateFormat: "H:mm: | D/M/Y"
+    locale: "pt-br"
+    showClockIcon: true
+  core:
+    autoHideMenuBar: true
+    disabledPackages: [
+      "atom-runner"
+      "Hydrogen"
+    ]
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "behave-theme"
+    ]
+  editor:
+    fontFamily: "Hack, Menlo, Consolas, DejaVu Sans Mono, monospace"
+    fontSize: 16
+  "exception-reporting":
+    userId: "721cd8f6-2344-44ce-bd1e-d12c52223e96"
+  tabs:
+    enableVcsColoring: true
+".gemfile.ruby.source":
+  editor:
+    showIndentGuide: true
