@@ -65,6 +65,7 @@ highlight LineNr ctermbg=235
 
 " set number"
 set number
+set relativenumber
 
 "tab config"
 set ts=2
