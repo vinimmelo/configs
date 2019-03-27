@@ -25,6 +25,8 @@
     enable_statusline_mode = false
     lint_on_the_fly = true
     gitstatus = true
+    autoindent = 1
+    
 
 # Enable autocomplete layer
 [[layers]]
