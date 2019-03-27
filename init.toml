@@ -41,3 +41,6 @@ name = 'lang#html'
 [[layers]]
 name = 'git'
 
+[[layers]]
+name = 'lang#python'
+format-on-save = 1
