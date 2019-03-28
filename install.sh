@@ -34,3 +34,20 @@ fi
 
 echo
 echo "Fonts installed into $font_dir"
+
+if [[ `uname` == 'Darwin' ]]; then
+  # MacOS
+  echo 'Nothing more to do!'
+  return
+else
+  #Linux
+  # Installation of SpaceVim
+  curl -sLf https://spacevim.org/install.sh | bash
+  echo 'SpaceVim installed'
+
+  # Copy of init.toml configurations!
+  cp init.toml ~/.SpaceVim.d/
+  echo 'Initial config copied to ~/.SpaceVim.d'
+fi
+
+echo 'Instalattion finished!'
