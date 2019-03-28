@@ -68,3 +68,5 @@ name = 'lang#sh'
 [[layers]]
 name = "colorscheme"
 
+[[custom_plugins]]
+name = 'tpope/vim-fugitive'
