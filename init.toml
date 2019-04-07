@@ -23,12 +23,12 @@
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
-    lint_on_the_fly = true
+    lint_on_the_fly = false 
     gitstatus = true
     autoindent = 1
     
 
-# Enable autocomplete layer
+# Layers - SpaceVim 
 [[layers]]
 name = 'autocomplete'
 auto-completion-return-key-behavior = "smart"
@@ -68,5 +68,14 @@ name = 'lang#sh'
 [[layers]]
 name = "colorscheme"
 
+[[layers]]
+  name = "tools"
+  enable = false
+
+# Custom Plugins
+ 
 [[custom_plugins]]
 name = 'tpope/vim-fugitive'
+
+[[custom_plugins]]
+name = 'nvie/vim-flake8'
