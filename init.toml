@@ -11,7 +11,7 @@
     # set spacevim theme. by default colorscheme layer is not loaded,
     # if you want to use more colorscheme, please load the colorscheme
     # layer
-    colorscheme = "monokai"
+    colorscheme = "Tomorrow-Night-Eighties"
     colorscheme_bg = "dark"
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
@@ -26,6 +26,8 @@
     lint_on_the_fly = false 
     gitstatus = true
     autoindent = 1
+    enable_neomake = false
+    enable_ale = true
     
 
 # Layers - SpaceVim 
@@ -79,3 +81,7 @@ name = 'tpope/vim-fugitive'
 
 [[custom_plugins]]
 name = 'nvie/vim-flake8'
+
+[[custom_plugins]]
+name = 'chriskempson/tomorrow-theme'
+merged = 0
