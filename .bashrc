@@ -83,6 +83,12 @@ alias la='ls -A'
 alias vini='cd /home/pi/Desktop/Programs'
 alias l='ls -lA'
 alias md='mkdir'
+alias gitp='git push'
+alias gitc='git commit'
+alias gits='git status'
+alias gitl='git log'
+alias gitpu='git pull'
+alias gita='git add *'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
