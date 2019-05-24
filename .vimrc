@@ -1,5 +1,6 @@
 " Load Pathogen
 execute pathogen#infect()
+call pathogen#helptags()
 
 " Use Vim settings, rather then Vi settings (much better!).
 " set nocompatible"
@@ -41,6 +42,7 @@ let c_comment_strings=1
 
 "color syntax"
 syn on
+syntax on
 set encoding=UTF-8
 
 " status line
@@ -52,6 +54,9 @@ let g:airline_theme = 'wombatseocam'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+set laststatus=2
 " tablines are cool but are degrading performance
 "let g:airline#extensions#tabline#enabled = 1
 
@@ -129,7 +134,18 @@ nmap <esc>OH 0
 nmap <esc>OF $
 imap <esc>OF <esc>$a
 cmap <esc>OF <end>
+" NERDTree Toggle
+map <F3> :NERDTreeToggle<CR>
+" Tagbar Toggle
+nmap <F2> :TagbarToggle<CR>
+" Buffers Key Map
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
+:nnoremap <C-X> :bdelete<CR>
 
 " Required to make highlight work for JSX with pure JS
 let g:jsx_ext_required = 0
 let g:syntastic_java_checkers = []
+
+" NERDTree Ignore
+let NERDTreeIgnore = ['\.pyc$']
