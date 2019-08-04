@@ -39,9 +39,6 @@ if [[ `uname` == 'Darwin' ]]; then
   # MacOS
   echo 'Nothing more to do!'
   return
-else
-  #Linux
-  # Do Nothing...
 fi
 
 echo 'Instalattion finished!'
