@@ -1,9 +1,41 @@
 " Load Pathogen
-execute pathogen#infect()
-call pathogen#helptags()
+call plug#begin('~/.vim/plugged')
 
 " Use Vim settings, rather then Vi settings (much better!).
 " set nocompatible"
+
+" Plugins with Plug
+Plug 'scrooloose/nerdtree'  " file list
+Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
+Plug 'vim-airline/vim-airline'  " make statusline awesome
+Plug 'vim-airline/vim-airline-themes'  " themes for statusline 
+Plug 'jonathanfilip/vim-lucius'  " nice white colortheme
+Plug 'davidhalter/jedi-vim'   " jedi for python
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  "to highlight files in nerdtree
+Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
+Plug 'kien/ctrlp.vim'  " fuzzy search files
+Plug 'tweekmonster/impsort.vim'  " color and sort imports
+Plug 'wsdjeg/FlyGrep.vim'  " awesome grep on the fly
+Plug 'w0rp/ale'  " python linters
+Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
+Plug 'tpope/vim-commentary'  "comment-out by gc
+Plug 'roxma/nvim-yarp'  " dependency of ncm2
+Plug 'ncm2/ncm2'  " awesome autocomplete plugin
+Plug 'HansPinckaers/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
+Plug 'ncm2/ncm2-bufword'  " buffer keyword completion
+Plug 'ncm2/ncm2-path'  " filepath completion
+Plug 'mattn/emmet-vim' " emmet vim, nice snippets to html
+Plug 'nvie/vim-flake8' " flake8 verification inside vim
+Plug 'tpope/vim-fugitive' " git integration inside vim
+Plug 'MarcWeber/vim-addon-mw-utils' " snippets
+Plug 'tomtom/tlib_vim' " snippets
+Plug 'garbas/vim-snipmate' " snippets
+Plug 'honza/vim-snippets' " snippets
+Plug 'NLKNguyen/papercolor-theme' " papercolor theme
+Plug 'tomasr/molokai' " molokai theme
+Plug 'scrooloose/syntastic' " syntax verification
+
+call plug#end()
 
 " Set wrap to things that make sense"
 set wrap linebreak nolist
@@ -22,7 +54,8 @@ set hlsearch
 " colorscheme delek
 " colorscheme desert
 " colorscheme default
-colorscheme PaperColor
+" colorscheme PaperColor
+colorscheme molokai
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -43,14 +76,15 @@ let c_comment_strings=1
 "color syntax"
 syn on
 syntax on
+syntax enable
 set encoding=UTF-8
 
 " status line
 "set statusline=%(%F%m%r%h%w\ [%Y]\ %{&encoding}\ %)%=%(%l,%v\ %LL\ %p%%%)
 set laststatus=2
 set linespace=0
-"let g:airline_theme = 'badwolf'
-let g:airline_theme = 'wombatseocam'
+let g:airline_theme = 'badwolf'
+" let g:airline_theme = 'wombatseocam'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
@@ -142,6 +176,8 @@ nmap <F2> :TagbarToggle<CR>
 :nnoremap <Tab> :bnext<CR>
 :nnoremap <S-Tab> :bprevious<CR>
 :nnoremap <C-X> :bdelete<CR>
+" Python isort
+let g:vim_isort_map = '<C-i>'
 
 " Required to make highlight work for JSX with pure JS
 let g:jsx_ext_required = 0
@@ -149,3 +185,7 @@ let g:syntastic_java_checkers = []
 
 " NERDTree Ignore
 let NERDTreeIgnore = ['\.pyc$']
+
+" Auto format Python Code
+autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
+
