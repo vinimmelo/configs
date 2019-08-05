@@ -1,9 +1,20 @@
+# The Python IDE with Vim
 
-To install just run the install script:
+The .vimrc maded to write python code.
+
+## Installation
+
+Clone the repo and, after that, just run the install script:
 
 ```
 $ ./install.sh
 ```
+## Post Installation
+After the installation:
+- Run vim
+- Execute `:PlugInstall`
+
+And that's it.
 
 To get all features working properly make sure you change your terminal font to ``hack`` (installed locally by the install.sh).
 
