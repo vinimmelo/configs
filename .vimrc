@@ -1,4 +1,8 @@
-" Load Pathogen
+" Author: Vinícius Melo
+" Email: vinicius.m.melo@me.com
+" The Perfect python IDE all configured!!!
+
+" Load Plug
 call plug#begin('~/.vim/plugged')
 
 " Use Vim settings, rather then Vi settings (much better!).
@@ -34,6 +38,7 @@ Plug 'honza/vim-snippets' " snippets
 Plug 'NLKNguyen/papercolor-theme' " papercolor theme
 Plug 'tomasr/molokai' " molokai theme
 Plug 'scrooloose/syntastic' " syntax verification
+Plug 'pycqa/pylint' " another linter, more annoying
 
 call plug#end()
 
@@ -188,4 +193,17 @@ let NERDTreeIgnore = ['\.pyc$']
 
 " Auto format Python Code
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
+
+" Jedi Vim options
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
+let g:jedi#show_call_signatures_delay = 0
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#show_call_signatures_modes = 'i'  " ni = also in normal mode
+let g:jedi#enable_speed_debugging=0
 
