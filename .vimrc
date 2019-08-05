@@ -207,3 +207,8 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#show_call_signatures_modes = 'i'  " ni = also in normal mode
 let g:jedi#enable_speed_debugging=0
 
+let mapleader = " " " Leader is the space key
+let g:mapleader = " "
+let maplocalleader = "`"
+let g:maplocalleader = "`"
+nnoremap <SPACE> <Nop>
