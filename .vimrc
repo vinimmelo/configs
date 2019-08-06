@@ -39,6 +39,9 @@ Plug 'NLKNguyen/papercolor-theme' " papercolor theme
 Plug 'tomasr/molokai' " molokai theme
 Plug 'scrooloose/syntastic' " syntax verification
 Plug 'pycqa/pylint' " another linter, more annoying
+Plug 'ervandew/supertab' " Super tab completion
+Plug 'tpope/vim-obsession' " Sessions autoload and finished
+Plug 'morhetz/gruvbox' " Gruvbox colorscheme
 
 call plug#end()
 
@@ -55,25 +58,16 @@ set incsearch
 set hlsearch
 
 "color scheme"
-" colorscheme elflord
-" colorscheme delek
-" colorscheme desert
-" colorscheme default
+
 " colorscheme PaperColor
-colorscheme molokai
+" colorscheme molokai
+colorscheme gruvbox
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
 " showmatch: Show the matching bracket for the last ')'?
 set showmatch
-
-"highlight search
-set hlsearch
-
-"incremental search
-set incsearch
-
 
 " highlight strings inside C comments
 let c_comment_strings=1
@@ -85,11 +79,9 @@ syntax enable
 set encoding=UTF-8
 
 " status line
-"set statusline=%(%F%m%r%h%w\ [%Y]\ %{&encoding}\ %)%=%(%l,%v\ %LL\ %p%%%)
 set laststatus=2
 set linespace=0
-let g:airline_theme = 'badwolf'
-" let g:airline_theme = 'wombatseocam'
+let g:airline_theme = 'gruvbox'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
@@ -196,19 +188,19 @@ autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 
 " Jedi Vim options
 let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled = 1
+" let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 1
 let g:jedi#completions_command = ""
 let g:jedi#show_call_signatures = "1"
 let g:jedi#show_call_signatures_delay = 0
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#show_call_signatures_modes = 'i'  " ni = also in normal mode
 let g:jedi#enable_speed_debugging=0
+let g:jedi#use_tabs_not_buffers = 1
 
-let mapleader = " " " Leader is the space key
-let g:mapleader = " "
-let maplocalleader = "`"
-let g:maplocalleader = "`"
-nnoremap <SPACE> <Nop>
+let mapleader = "," " Leader is the space key
+let g:mapleader = ","
+let maplocalleader = ","
+let g:maplocalleader = ","
