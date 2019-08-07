@@ -41,7 +41,7 @@ if [[ `uname` == 'Darwin' ]]; then
   return
 fi
 
-if [ ! -d ~/.config]; then
+if [ ! -d ~/.config ]; then
   mkdir ~/.config
   echo
   echo "Created $HOME/.config"
@@ -49,6 +49,6 @@ fi
 
 cp flake8 ~/.config/flake8
 echo
-echo "Copied flake8 configuration to your ~/.config"
+echo "Copied flake8 configuration to your $HOME/.config"
 
 echo 'Instalattion finished!'
