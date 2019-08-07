@@ -45,7 +45,7 @@ Plug 'morhetz/gruvbox' " Gruvbox colorscheme
 Plug 'tmhedberg/SimpylFold' " Gruvbox colorscheme
 Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
-Plug 'Shougo/neocomplcache.vim' " better autocomplete
+Plug 'Shougo/neocomplete.vim' " better autocomplete
 
 call plug#end()
 
@@ -224,20 +224,10 @@ set fileformat=unix
 " Copy to clipboard
 set clipboard=unnamed
 
-" Neocomplcache
-
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 1
-" complete with workds from any opened file
-let g:neocomplcache_same_filetype_lists = {}
-let g:neocomplcache_same_filetype_lists._ = '_'
+" Use neocomplete.
+ 
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
