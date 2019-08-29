@@ -103,10 +103,12 @@ alias ssha='eval `ssh-agent -s`; ssh-add'
 alias conaz='ssh vinicius@teste.conazweb.com.br -p 4202'
 alias active='source venv/bin/activate'
 alias work='cd /home/vinimmelo/Documents/work/conazwebv2/web'
+alias ll='ls -lAh'
 
 autoload -U compinit && compinit
 export FLASK_ENV='dev'
 export ENV='dev'
 source /home/vinimmelo/Documents/work/conazwebv2/web/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /home/vinimmelo/Documents/work/conazwebv2/web/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /home/vinimmelo/Documents/work/conazwebv2/web/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="$PATH:/home/vinimmelo/.local/bin:/home/vinimmelo/.pyenv/bin"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
