@@ -46,6 +46,7 @@ Plug 'tmhedberg/SimpylFold' " Gruvbox colorscheme
 Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
 Plug 'Shougo/neocomplete.vim' " better autocomplete
+Plug 'hdima/python-syntax' " Better syntax highlight
 
 call plug#end()
 
@@ -90,7 +91,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 0
 set laststatus=2
 " tablines are cool but are degrading performance
 "let g:airline#extensions#tabline#enabled = 1
@@ -195,17 +196,17 @@ let g:jedi#auto_initialization = 1
 let g:jedi#completions_enabled = 1
 " let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 1
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
-let g:jedi#show_call_signatures_delay = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#show_call_signatures = "0"
+let g:jedi#show_call_signatures_delay = 1.5
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#show_call_signatures_modes = 'i'  " ni = also in normal mode
 let g:jedi#enable_speed_debugging=0
 let g:jedi#use_tabs_not_buffers = 1
 
-" Change leader key to space
-let mapleader = "," " 
+" Change leader key to comma
+let mapleader = "," 
 let g:mapleader = ","
 let maplocalleader = ","
 let g:maplocalleader = ","
@@ -237,3 +238,5 @@ let g:ale_echo_cursor = 0
 
 " FlyGrep
 nnoremap <leader>f :FlyGrep<cr>
+" All syntax highlight
+let python_highlight_all = 1
