@@ -108,14 +108,14 @@ set number
 set relativenumber
 
 "tab config"
-set ts=2
+set ts=4
 set expandtab
-set softtabstop=2
+set softtabstop=4
 
 " 4 spaces for indenting
-set shiftwidth=2
-set autoindent
-set cindent
+set shiftwidth=4
+" set autoindent
+" set cindent
 
 "Disable autoindentation"
 set noai
@@ -231,3 +231,9 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Ale Configurations
+let g:ale_echo_cursor = 0
+
+" FlyGrep
+nnoremap <leader>f :FlyGrep<cr>
