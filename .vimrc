@@ -20,12 +20,9 @@ Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'kien/ctrlp.vim'  " fuzzy search files
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
 Plug 'wsdjeg/FlyGrep.vim'  " awesome grep on the fly
-Plug 'w0rp/ale'  " python linters
-Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'tpope/vim-commentary'  "comment-out by gc
 Plug 'roxma/nvim-yarp'  " dependency of ncm2
 Plug 'ncm2/ncm2'  " awesome autocomplete plugin
-Plug 'HansPinckaers/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
 Plug 'ncm2/ncm2-bufword'  " buffer keyword completion
 Plug 'ncm2/ncm2-path'  " filepath completion
 Plug 'mattn/emmet-vim' " emmet vim, nice snippets to html
@@ -37,7 +34,6 @@ Plug 'garbas/vim-snipmate' " snippets
 Plug 'honza/vim-snippets' " snippets
 Plug 'NLKNguyen/papercolor-theme' " papercolor theme
 Plug 'tomasr/molokai' " molokai theme
-Plug 'scrooloose/syntastic' " syntax verification
 Plug 'pycqa/pylint' " another linter, more annoying
 Plug 'ervandew/supertab' " Super tab completion
 Plug 'tpope/vim-obsession' " Sessions autoload and finished
@@ -47,6 +43,10 @@ Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
 Plug 'Shougo/neocomplete.vim' " better autocomplete
 Plug 'hdima/python-syntax' " Better syntax highlight
+Plug 'ajh17/spacegray.vim' " Spacegray Colorscheme
+Plug 'danilo-augusto/vim-afterglow' " Afterglow colorscheme
+Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'vim-syntastic/syntastic' " Syntastic
 
 call plug#end()
 
@@ -66,7 +66,7 @@ set hlsearch
 
 " colorscheme PaperColor
 " colorscheme molokai
-colorscheme gruvbox
+colorscheme Tomorrow-Night
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -86,7 +86,7 @@ set encoding=UTF-8
 " status line
 set laststatus=2
 set linespace=0
-let g:airline_theme = 'gruvbox'
+let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
@@ -94,15 +94,12 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 0
 set laststatus=2
 " tablines are cool but are degrading performance
-"let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " Keep git sign column as default (+, -, ~, etc.)
-"let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_max_signs = 10000
 
-" Change line number color
-" (by default gitgutter uses same color as LineNr)
-highlight LineNr ctermbg=235
 
 " set number"
 set number
@@ -234,9 +231,18 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Ale Configurations
-let g:ale_echo_cursor = 0
+" let g:ale_echo_cursor = 0
 
 " FlyGrep
 nnoremap <leader>f :FlyGrep<cr>
 " All syntax highlight
 let python_highlight_all = 1
+
+let g:spacegray_low_contrast = 0
+let g:spacegray_use_italics = 1
+let g:spacegray_underline_search = 1
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
