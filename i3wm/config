@@ -231,4 +231,5 @@ exec --no-startup-id pulseaudio -D
 exec --no-startup-id dropbox
 exec --no-startup-id feh --bg-fill ~/Pictures/arch.png
 exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1
+exec --no-startup-id slack
 
