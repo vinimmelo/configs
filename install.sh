@@ -11,6 +11,7 @@ echo
 
 mkdir -p ~/.vim/
 rsync -vr .vim/ ~/.vim
+rsync -vr colors/ ~/.vim/colors
 
 echo
 echo "Vim plugins installed into $HOME/.vim/"
