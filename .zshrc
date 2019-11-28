@@ -68,7 +68,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python pylint compleat cp history pip virtualenv zsh-autosuggestions)
+plugins=(git python pylint compleat cp history pip virtualenv zsh-autosuggestions z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,7 +108,3 @@ alias ll='ls -lAh'
 autoload -U compinit && compinit
 export FLASK_ENV='dev'
 export ENV='dev'
-source /home/vinimmelo/Documents/work/conazwebv2/web/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export PATH="$PATH:/home/vinimmelo/.local/bin:/home/vinimmelo/.pyenv/bin"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
