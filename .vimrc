@@ -13,40 +13,24 @@ Plug 'scrooloose/nerdtree'  " file list
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'vim-airline/vim-airline'  " make statusline awesome
 Plug 'vim-airline/vim-airline-themes'  " themes for statusline 
-Plug 'jonathanfilip/vim-lucius'  " nice white colortheme
 Plug 'davidhalter/jedi-vim'   " jedi for python
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  "to highlight files in nerdtree
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'kien/ctrlp.vim'  " fuzzy search files
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
-Plug 'wsdjeg/FlyGrep.vim'  " awesome grep on the fly
 Plug 'tpope/vim-commentary'  "comment-out by gc
-Plug 'roxma/nvim-yarp'  " dependency of ncm2
-Plug 'ncm2/ncm2'  " awesome autocomplete plugin
-Plug 'ncm2/ncm2-bufword'  " buffer keyword completion
-Plug 'ncm2/ncm2-path'  " filepath completion
 Plug 'mattn/emmet-vim' " emmet vim, nice snippets to html
 Plug 'nvie/vim-flake8' " flake8 verification inside vim
 Plug 'tpope/vim-fugitive' " git integration inside vim
-Plug 'MarcWeber/vim-addon-mw-utils' " snippets
-Plug 'tomtom/tlib_vim' " snippets
-Plug 'garbas/vim-snipmate' " snippets
-Plug 'honza/vim-snippets' " snippets
 Plug 'NLKNguyen/papercolor-theme' " papercolor theme
 Plug 'tomasr/molokai' " molokai theme
 Plug 'pycqa/pylint' " another linter, more annoying
 Plug 'ervandew/supertab' " Super tab completion
-Plug 'tpope/vim-obsession' " Sessions autoload and finished
 Plug 'morhetz/gruvbox' " Gruvbox colorscheme
 Plug 'tmhedberg/SimpylFold' " Gruvbox colorscheme
 Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
 Plug 'Shougo/neocomplete.vim' " better autocomplete
-Plug 'hdima/python-syntax' " Better syntax highlight
-Plug 'ajh17/spacegray.vim' " Spacegray Colorscheme
-Plug 'danilo-augusto/vim-afterglow' " Afterglow colorscheme
-Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'vim-syntastic/syntastic' " Syntastic
 
 call plug#end()
 
@@ -66,7 +50,7 @@ set hlsearch
 
 " colorscheme PaperColor
 " colorscheme molokai
-colorscheme Tomorrow-Night
+colorscheme gruvbox
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -86,7 +70,7 @@ set encoding=UTF-8
 " status line
 set laststatus=2
 set linespace=0
-let g:airline_theme='tomorrow'
+let g:airline_theme='raven'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1

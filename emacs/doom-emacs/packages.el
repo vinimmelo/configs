@@ -8,7 +8,6 @@
 (package! wttrin :recipe (:host github :repo "bcbcarl/emacs-wttrin"))
 (package! doom-themes)
 (package! py-autopep8)
-(package! blacken)
 (package! elpy)
 (package! org-bullets)
 (package! org-super-agenda)
@@ -16,3 +15,4 @@
 (package! all-the-icons)
 (package! powerline)
 (package! hc-zenburn-theme)
+(package! avy)

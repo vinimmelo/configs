@@ -8,15 +8,26 @@
 (global-set-key [f9] 'wttrin)
 (setq doom-localleader-key ",")
 
-;; Enable autopep8 and modes for Python
-(require 'py-autopep8)
+;; Python config
 (elpy-enable)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+;; Org Config
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-log-done 'time)
 
 ;; Theme
-(setq doom-theme 'hc-zenburn)
+(setq doom-theme 'doom-molokai)
+
+;; Moe Theme
+;; (show-paren-mode t)
+;; (setq show-paren-style 'expression)
+;; (require 'moe-theme)
+;; (setq moe-theme-highlight-buffer-id t)
+;; (moe-theme-set-color 'orange)
+;; (moe-light)
 
 ;; Personal Configurations
 (setq display-line-numbers-type 'relative)
 (setq wttrin-default-cities '("Florianópolis" "São Paulo" "Ribeirão Preto"))
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key [f5] 'avy-goto-char-2)
