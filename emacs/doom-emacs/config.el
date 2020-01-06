@@ -31,3 +31,19 @@
 (setq wttrin-default-cities '("Florianópolis" "São Paulo" "Ribeirão Preto"))
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 (global-set-key [f5] 'avy-goto-char-2)
+
+;; Go Specifics language
+(add-to-list 'exec-path "/user/local/go/bin")
+(add-hook 'before-save-hook 'gofmt-before-save)
+(defun auto-complete-for-go ()
+(auto-complete-mode 1))
+ (add-hook 'go-mode-hook 'auto-complete-for-go)
+
+;; Copy Entire Line
+(defun copy-line (arg)
+  "Copy lines (as many as prefix argument) in the kill ring"
+  (interactive "p")
+  (kill-ring-save (line-beginning-position)
+                  (line-beginning-position (+ 1 arg)))
+  (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+(global-set-key "\C-c\C-k" 'copy-line)

@@ -16,3 +16,6 @@
 (package! powerline)
 (package! hc-zenburn-theme)
 (package! avy)
+(package! go-autocomplete)
+(package! go-playground)
+(package! emmet-mode)
