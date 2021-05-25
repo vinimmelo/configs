@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins with Plug
 Plug 'scrooloose/nerdtree'  " file list
+Plug 'xuyuanp/nerdtree-git-plugin' " Nerdtree git plugin
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'vim-airline/vim-airline'  " make statusline awesome
 Plug 'vim-airline/vim-airline-themes'  " themes for statusline 
@@ -22,15 +23,22 @@ Plug 'tpope/vim-commentary'  "comment-out by gc
 Plug 'mattn/emmet-vim' " emmet vim, nice snippets to html
 Plug 'nvie/vim-flake8' " flake8 verification inside vim
 Plug 'tpope/vim-fugitive' " git integration inside vim
-Plug 'NLKNguyen/papercolor-theme' " papercolor theme
-Plug 'tomasr/molokai' " molokai theme
+Plug 'flazz/vim-colorschemes'
 Plug 'pycqa/pylint' " another linter, more annoying
 Plug 'ervandew/supertab' " Super tab completion
-Plug 'morhetz/gruvbox' " Gruvbox colorscheme
 Plug 'tmhedberg/SimpylFold' " Gruvbox colorscheme
 Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
 Plug 'Shougo/neocomplete.vim' " better autocomplete
+Plug 'tpope/vim-rails' " rails
+Plug 'vim-ruby/vim-ruby' " ruby
+Plug 'vim-utils/vim-ruby-fold' "fold
+Plug 'vim-scripts/rainbow-end'
+Plug 'valloric/youcompleteme'
+Plug 'easymotion/vim-easymotion' " move everywhere
+Plug 'mileszs/ack.vim' " search easily
+Plug 'fatih/vim-go' " vim with go
+Plug 'thaerkh/vim-workspace' " Workspace
 
 call plug#end()
 
@@ -50,7 +58,7 @@ set hlsearch
 
 " colorscheme PaperColor
 " colorscheme molokai
-colorscheme gruvbox
+colorscheme PaperColor
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -70,7 +78,7 @@ set encoding=UTF-8
 " status line
 set laststatus=2
 set linespace=0
-let g:airline_theme='raven'
+let g:airline_theme='fruit_punch'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
@@ -116,9 +124,6 @@ set spelllang=en,pt_br
 
 " vim markdown settings
 let g:vim_markdown_folding_disabled=1
-
-" force vim to use 265 colors
-set term=screen-256color
 
 " remove trailing spaces for certain file types
 autocmd FileType python,javascript,ruby,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -230,3 +235,21 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
+
+
+" easy motion
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+
+" ag search
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+nnoremap <Leader>/ :Ack!<Space>
+
+" Go specifcs
+let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save     
+let g:go_auto_type_info = 1           " Automatically get signature/type info for object under cursor
+
+" Session | Workspace
+nnoremap <leader>s :ToggleWorkspace<CR>
