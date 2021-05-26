@@ -23,13 +23,16 @@ Plug 'tpope/vim-commentary'  "comment-out by gc
 Plug 'mattn/emmet-vim' " emmet vim, nice snippets to html
 Plug 'nvie/vim-flake8' " flake8 verification inside vim
 Plug 'tpope/vim-fugitive' " git integration inside vim
+" Colorschemes
 Plug 'flazz/vim-colorschemes'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'ayu-theme/ayu-vim'
+
 Plug 'pycqa/pylint' " another linter, more annoying
 Plug 'ervandew/supertab' " Super tab completion
-Plug 'tmhedberg/SimpylFold' " Gruvbox colorscheme
+Plug 'tmhedberg/SimpylFold'
 Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
-Plug 'Shougo/neocomplete.vim' " better autocomplete
 Plug 'tpope/vim-rails' " rails
 Plug 'vim-ruby/vim-ruby' " ruby
 Plug 'vim-utils/vim-ruby-fold' "fold
@@ -39,14 +42,14 @@ Plug 'easymotion/vim-easymotion' " move everywhere
 Plug 'mileszs/ack.vim' " search easily
 Plug 'fatih/vim-go' " vim with go
 Plug 'thaerkh/vim-workspace' " Workspace
+Plug 'liuchengxu/vim-which-key' " Helper
+Plug 'joker1007/vim-ruby-heredoc-syntax'
+Plug 'elzr/vim-json'
 
 call plug#end()
 
 " Set wrap to things that make sense"
 set wrap linebreak nolist
-
-" Set background type"
-set background=dark
 
 "incremental search
 set incsearch
@@ -54,11 +57,22 @@ set incsearch
 "search highlighted, all ocurrences
 set hlsearch
 
-"color scheme"
+"color syntax"
+syn on
+syntax on
+syntax enable
+set termguicolors
+set encoding=UTF-8
 
-" colorscheme PaperColor
+"color scheme"
 " colorscheme molokai
-colorscheme PaperColor
+" colorscheme jellybeans
+set background=dark
+
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -69,16 +83,10 @@ set showmatch
 " highlight strings inside C comments
 let c_comment_strings=1
 
-"color syntax"
-syn on
-syntax on
-syntax enable
-set encoding=UTF-8
-
 " status line
 set laststatus=2
 set linespace=0
-let g:airline_theme='fruit_punch'
+let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 1
@@ -92,6 +100,14 @@ set laststatus=2
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_max_signs = 10000
 
+
+" Change leader key to comma
+let mapleader = "\<Space>" 
+let g:mapleader = "\<Space>"
+let maplocalleader = ","
+let g:maplocalleader = ","
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 " set number"
 set number
@@ -161,7 +177,7 @@ map <F3> :NERDTreeToggle<CR>
 " Tagbar Toggle
 nmap <F2> :TagbarToggle<CR>
 " Buffers Key Map
-:nnoremap <Tab> :bnext<CR>
+:nnoremap <Leader><tab> :bnext<CR>
 :nnoremap <S-Tab> :bprevious<CR>
 :nnoremap <C-X> :bdelete<CR>
 " Python isort
@@ -191,12 +207,6 @@ let g:jedi#show_call_signatures_modes = 'i'  " ni = also in normal mode
 let g:jedi#enable_speed_debugging=0
 let g:jedi#use_tabs_not_buffers = 1
 
-" Change leader key to comma
-let mapleader = "," 
-let g:mapleader = ","
-let maplocalleader = ","
-let g:maplocalleader = ","
-
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -210,14 +220,6 @@ set fileformat=unix
 
 " Copy to clipboard
 set clipboard=unnamed
-
-" Use neocomplete.
- 
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Ale Configurations
 " let g:ale_echo_cursor = 0
@@ -239,13 +241,13 @@ let g:syntastic_check_on_wq = 1
 
 " easy motion
 nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+nmap t <Plug>(easymotion-overwin-f)
 
 " ag search
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-nnoremap <Leader>/ :Ack!<Space>
+nnoremap <leader>/ :Ack!<Space>
 
 " Go specifcs
 let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save     
@@ -253,3 +255,8 @@ let g:go_auto_type_info = 1           " Automatically get signature/type info fo
 
 " Session | Workspace
 nnoremap <leader>s :ToggleWorkspace<CR>
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+
+" Move line with ALT
+noremap <M-up> :call feedkeys( line('.')==1 ? '' : 'ddkP' )<CR>
+noremap <M-down> ddp
