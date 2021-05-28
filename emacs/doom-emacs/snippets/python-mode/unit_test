@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: unit_test
+# key: ut
+# --
+
+import unittest
+from mock import Mock
+from app.$1.$2 import $3
+
+
+class $4(unittest.TestCase):
+    def setUp(self):
+        self.uc = $0

@@ -1,0 +1,12 @@
+# key: ucase
+# name: use case python
+# --
+from app.shared.response import ResponseSuccess
+
+
+class $1:
+    def __init__(self, $2):
+        self.$3
+
+    def execute(self, $4):
+        $0

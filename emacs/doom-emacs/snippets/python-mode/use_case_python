@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: use case python
+# key: ucase
+# --
+
+from app.shared.response import ResponseFailure, ResponseSuccess
+
+
+class $1:
+    def __init__(self, $2):
+        $0
