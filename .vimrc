@@ -13,10 +13,9 @@ Plug 'scrooloose/nerdtree'  " file list
 Plug 'xuyuanp/nerdtree-git-plugin' " Nerdtree git plugin
 Plug 'majutsushi/tagbar'  " show tags in a bar (functions etc) for easy browsing
 Plug 'vim-airline/vim-airline'  " make statusline awesome
-Plug 'vim-airline/vim-airline-themes'  " themes for statusline 
+Plug 'vim-airline/vim-airline-themes'  " themes for statusline
 Plug 'davidhalter/jedi-vim'   " jedi for python
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  "to highlight files in nerdtree
-Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'kien/ctrlp.vim'  " fuzzy search files
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
 Plug 'tpope/vim-commentary'  "comment-out by gc
@@ -31,8 +30,8 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'pycqa/pylint' " another linter, more annoying
 Plug 'ervandew/supertab' " Super tab completion
 Plug 'tmhedberg/SimpylFold'
-Plug 'vim-scripts/indentpython.vim' " better indentation
 Plug 'jiangmiao/auto-pairs' " auto pairs quotes and parenthesis
+Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-rails' " rails
 Plug 'vim-ruby/vim-ruby' " ruby
 Plug 'vim-utils/vim-ruby-fold' "fold
@@ -40,11 +39,12 @@ Plug 'vim-scripts/rainbow-end'
 Plug 'valloric/youcompleteme'
 Plug 'easymotion/vim-easymotion' " move everywhere
 Plug 'mileszs/ack.vim' " search easily
-Plug 'fatih/vim-go' " vim with go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " vim with go
 Plug 'thaerkh/vim-workspace' " Workspace
 Plug 'liuchengxu/vim-which-key' " Helper
 Plug 'joker1007/vim-ruby-heredoc-syntax'
-Plug 'elzr/vim-json'
+Plug 'jparise/vim-graphql'
+Plug 'jez/vim-better-sml'
 
 call plug#end()
 
@@ -67,7 +67,7 @@ set encoding=UTF-8
 "color scheme"
 " colorscheme molokai
 " colorscheme jellybeans
-set background=dark
+" set background=dark
 
 " let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
@@ -102,7 +102,7 @@ let g:gitgutter_max_signs = 10000
 
 
 " Change leader key to comma
-let mapleader = "\<Space>" 
+let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 let maplocalleader = ","
 let g:maplocalleader = ","
@@ -120,8 +120,11 @@ set softtabstop=4
 
 " 4 spaces for indenting
 set shiftwidth=4
-" set autoindent
-" set cindent
+set ai
+set cindent
+set smartindent
+set autoindent
+" set indentexpr=
 
 "Disable autoindentation"
 set noai
@@ -137,9 +140,6 @@ set completeopt=menu
 set modelines=1
 
 set spelllang=en,pt_br
-
-" vim markdown settings
-let g:vim_markdown_folding_disabled=1
 
 " remove trailing spaces for certain file types
 autocmd FileType python,javascript,ruby,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -163,7 +163,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " Source: http://stackoverflow.com/questions/33315406/open-all-selected-files-as-hidden-buffer
 let g:ctrlp_open_multiple_files = 'ij'
 
-" For some reason home and end keys are not mapping properly."
+" KeyMappings
 " Home key"
 imap <esc>OH <esc>0i
 cmap <esc>OH <home>
@@ -176,12 +176,23 @@ cmap <esc>OF <end>
 map <F3> :NERDTreeToggle<CR>
 " Tagbar Toggle
 nmap <F2> :TagbarToggle<CR>
+
+noremap <F4> :Autoformat<CR>
 " Buffers Key Map
 :nnoremap <Leader><tab> :bnext<CR>
 :nnoremap <S-Tab> :bprevious<CR>
 :nnoremap <C-X> :bdelete<CR>
+
+
+" Workspace
+nnoremap <leader>s :ToggleWorkspace<CR>
+
 " Python isort
 let g:vim_isort_map = '<C-i>'
+
+" Move line with ALT
+noremap <M-up> :call feedkeys( line('.')==1 ? '' : 'ddkP' )<CR>
+noremap <M-down> ddp
 
 " Required to make highlight work for JSX with pure JS
 let g:jsx_ext_required = 0
@@ -191,7 +202,7 @@ let g:syntastic_java_checkers = []
 let NERDTreeIgnore = ['\.pyc$']
 
 " Auto format Python Code
-autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
+let g:formatters_python = ['black']
 
 " Jedi Vim options
 let g:jedi#auto_initialization = 1
@@ -245,18 +256,15 @@ nmap t <Plug>(easymotion-overwin-f)
 
 " ag search
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'ag --vimgrep'
 endif
 nnoremap <leader>/ :Ack!<Space>
 
 " Go specifcs
-let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save     
+let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save
 let g:go_auto_type_info = 1           " Automatically get signature/type info for object under cursor
 
 " Session | Workspace
-nnoremap <leader>s :ToggleWorkspace<CR>
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
-" Move line with ALT
-noremap <M-up> :call feedkeys( line('.')==1 ? '' : 'ddkP' )<CR>
-noremap <M-down> ddp
+
