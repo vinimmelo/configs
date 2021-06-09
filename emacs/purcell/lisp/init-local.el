@@ -17,11 +17,25 @@
  :ensure t)
 
 (use-package go-mode
- :ensure t)
+  :ensure t
+  :config
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'go-mode-hook (lambda () (setq tab-width 4))))
+
+(use-package lsp-mode
+  :ensure t
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (go-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred))
 
 (use-package ace-jump-mode
- :ensure t
- :bind ("C-c SPC" . ace-jump-mode))
+  :ensure t
+  :bind ("C-c SPC" . ace-jump-mode))
 
 (use-package doom-themes
   :ensure t
@@ -70,16 +84,103 @@
   :config
   (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 
-(use-package company-go
-  :ensure t
-  :after (company))
-
 (use-package prescient
   :ensure t)
 
 (use-package company-prescient
   :ensure t
   :after (prescient))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after (yasnippet))
+
+(use-package go-snippets
+  :ensure t
+  :after (yasnippet))
+
+(use-package django-snippets
+  :ensure t
+  :after (yasnippet))
+
+(use-package counsel
+  :ensure t
+  :after ivy
+  :bind
+  ("C-c k" . 'counsel-ag))
+
+
+(use-package swiper
+  :ensure t
+  :after (ivy)
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
+
+(use-package ivy-posframe
+  :ensure t
+  :after (ivy)
+  :config
+  (setq ivy-posframe-display-functions-alist
+        '((swiper          . ivy-posframe-display-at-window-center)
+          (complete-symbol . ivy-posframe-display-at-point)
+          (counsel-M-x     . ivy-posframe-display-at-frame-bottom-left)
+          (t               . ivy-posframe-display)))
+  (ivy-posframe-mode 1))
+
+(use-package ivy-avy
+  :ensure t
+  :after (ivy))
+
+(use-package go-projectile
+  :ensure t)
+
+(use-package smex
+  :ensure t
+  :after (ivy))
+
+(use-package counsel-projectile
+  :ensure t
+  :after (counsel)
+  :init
+  (counsel-projectile-mode)
+  :bind
+  ("C-c p" . projectile-mode-map))
+
+(use-package ivy
+  :ensure t
+  :defer 0.1
+  :diminish
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x B" . ivy-switch-buffer-other-window))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-use-virtual-buffers t)
+  :config (ivy-mode)
+  (setq enable-recursive-minibuffers t)
+  (setcdr (assoc 'counsel-M-x ivy-initial-inputs-alist) ""))
+
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
+(use-package ivy-rich
+  :ensure t
+  :after (ivy)
+  :custom
+  (ivy-virtual-abbreviate 'full
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (ivy-rich-mode 1))
+
 
 ;; Personal Config
 (load-theme 'doom-old-hope)
@@ -108,5 +209,7 @@
          "* TODO %t %?\n ")
         ("n" "Note" entry (file+headline "~/Documents/notes.org")
          "* %?\nEntered on %U\n  %i\n  %a")))
+
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 (provide 'init-local)
