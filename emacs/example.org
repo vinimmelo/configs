@@ -1,0 +1,5 @@
+* Org-mode configuration
+#+STARTUP: overview
+#+TITLE: Tasks
+#+AUTHOR: Vinícius Muniz de Melo
+#+SEQ_TODO: TODO(t) STARTED(s) LOCKED(l) | DONE(d) ABANDONED(c)
