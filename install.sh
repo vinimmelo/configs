@@ -13,9 +13,10 @@ mkdir -p ~/.vim/
 rsync -vr .vim/ ~/.vim
 rsync -vr colors/ ~/.vim/colors
 rsync -vr .tmux.conf ~/.tmux.conf
+rsync -vr .zshrc ~/.zshrc 
 
 echo
-echo "Vim plugins installed into $HOME/.vim/"
+echo echo "Vim plugins installed into $HOME/.vim/"
 echo
 
 if [[ `uname` == 'Darwin' ]]; then
