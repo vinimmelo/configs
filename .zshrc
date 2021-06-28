@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/enguser/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="typewritten"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,7 +68,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z zsh-autosuggestions rails ruby rvm docker docker-compose fd git-extras git-auto-fetch)
+plugins=(git z zsh-autosuggestions zsh-syntax-highlighting rails ruby rvm docker docker-compose fd git-extras git-auto-fetch)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,14 +94,11 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+
+# Typewritten config
+export TYPEWRITTEN_PROMPT_LAYOUT="pure"
+export TYPEWRITTEN_CURSOR="beam"
+
 # Aliases
-alias console-qa="aws ssm start-session --target $1"
 alias vim=nvim
-
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-source /home/enguser/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-export TERM=xterm-256color
+alias vim=nvim
