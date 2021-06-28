@@ -1,7 +1,9 @@
 ;; init-local --- personal configs
 ;; Personal Configs
 
-(eval-when-compile 
+(require 'use-package)
+
+(eval-when-compile
   (require 'use-package))
 
 ;; Packages
@@ -14,7 +16,10 @@
  :bind ([f9] . wttrin))
 
 (use-package all-the-icons
- :ensure t)
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
 
 (use-package go-mode
   :ensure t
@@ -30,7 +35,9 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (go-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
+         (lsp-mode . lsp-enable-which-key-integration)
+         (js2-mode . lsp-deferred)
+         (python-mode . lsp-deferred))
   :commands (lsp lsp-deferred))
 
 (use-package ace-jump-mode
@@ -108,13 +115,6 @@
   :ensure t
   :after (yasnippet))
 
-(use-package counsel
-  :ensure t
-  :after ivy
-  :bind
-  ("C-c k" . 'counsel-ag))
-
-
 (use-package swiper
   :ensure t
   :after (ivy)
@@ -128,7 +128,7 @@
   (setq ivy-posframe-display-functions-alist
         '((swiper          . ivy-posframe-display-at-window-center)
           (complete-symbol . ivy-posframe-display-at-point)
-          (counsel-M-x     . ivy-posframe-display-at-frame-bottom-left)
+          (counsel-M-x     . ivy-posframe-display-at-window-center)
           (t               . ivy-posframe-display)))
   (ivy-posframe-mode 1))
 
@@ -143,6 +143,14 @@
   :ensure t
   :after (ivy))
 
+(use-package counsel
+  :ensure t
+  :after ivy
+  :init
+  (counsel-mode)
+  :bind
+  ("C-c k" . 'counsel-ag))
+
 (use-package counsel-projectile
   :ensure t
   :after (counsel)
@@ -150,6 +158,82 @@
   (counsel-projectile-mode)
   :bind
   ("C-c p" . projectile-mode-map))
+
+(use-package blacken
+  :ensure t
+  :hook (python-mode . blacken-mode))
+
+(use-package lsp-jedi
+  :ensure t)
+
+(use-package dockerfile-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+
+(use-package docker-compose-mode
+  :ensure t)
+
+(use-package web-mode
+  :ensure t
+  :mode
+  (("\\.phtml\\'" . web-mode)
+   ("\\.tpl\\.php\\'" . web-mode)
+   ("\\.jsp\\'" . web-mode)
+   ("\\.as[cp]x\\'" . web-mode)
+   ("\\.erb\\'" . web-mode)
+   ("\\.mustache\\'" . web-mode)
+   ("\\.djhtml\\'" . web-mode)
+   ("\\.jst.ejs\\'" . web-mode)
+   ("\\.html?\\'" . web-mode))
+  :config
+  (setq web-mode-engines-alist
+        '(("django" . "focus/.*\\.html\\'")
+          ("ctemplate" . "realtimecrm/.*\\.html\\'"))))
+
+(use-package js2-mode
+  :ensure t
+  :init
+  (setq js-basic-indent 2)
+  (setq-default js2-basic-indent 2
+                js2-basic-offset 2
+                js2-auto-indent-p t
+                js2-cleanup-whitespace t
+                js2-enter-indents-newline t
+                js2-indent-on-enter-key t
+                js2-global-externs (list "window" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON" "jQuery" "$"))
+
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (push '("function" . ?ƒ) prettify-symbols-alist)))
+
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
+
+(use-package js2-refactor
+  :ensure t
+  :init   (add-hook 'js2-mode-hook 'js2-refactor-mode)
+  :config (js2r-add-keybindings-with-prefix "C-c ."))
+
+(use-package skewer-mode
+  :ensure t
+  :init (add-hook 'js2-mode-hook 'skewer-mode))
+
+(use-package emmet-mode
+  :ensure t
+  :after web-mode
+  :hook (web-mode . emmet-mode))
+
+(use-package web-beautify
+  :ensure t)
+
+(use-package rainbow-mode
+  :ensure t
+  :hook (scss-mode less-mode css-mode))
+
+(use-package graphql-mode
+  :ensure t
+  :mode
+  ("\\.graphqls\\'" . graphql-mode))
 
 (use-package ivy
   :ensure t
@@ -183,7 +267,7 @@
 
 
 ;; Personal Config
-(load-theme 'doom-old-hope)
+(load-theme 'doom-molokai)
 (set-frame-font "JetBrains Mono Bold 12" nil t)
 
 ;; Keybindings
@@ -211,5 +295,25 @@
          "* %?\nEntered on %U\n  %i\n  %a")))
 
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+(eval-after-load 'js
+  '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'json-mode
+  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'web-mode
+  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
+
+(eval-after-load 'css-mode
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
+(global-hl-todo-mode)
+
+(add-hook 'js2-mode-hook (lambda ()
+                           (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))))
 
 (provide 'init-local)
