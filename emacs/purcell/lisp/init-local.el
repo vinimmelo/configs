@@ -12,8 +12,8 @@
   :bind ([f8] . neotree-toggle))
 
 (use-package wttrin
- :ensure t
- :bind ([f9] . wttrin))
+  :ensure t
+  :bind ([f9] . wttrin))
 
 (use-package all-the-icons
   :ensure t)
@@ -37,7 +37,8 @@
          (go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration)
          (js2-mode . lsp-deferred)
-         (python-mode . lsp-deferred))
+         (python-mode . lsp-deferred)
+         (web-mode . lsp-deferred))
   :commands (lsp lsp-deferred))
 
 (use-package ace-jump-mode
@@ -63,7 +64,9 @@
   (setq doom-modeline-enable-word-count t)
   (setq doom-modeline-lsp t)
   (setq doom-modeline-project-detection 'project)
-  (setq doom-modeline-buffer-file-name-style 'truncate-with-project))
+  (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-enable-word-count t))
 
 (use-package polymode
   :ensure t)
@@ -163,13 +166,34 @@
   :ensure t
   :hook (python-mode . blacken-mode))
 
-(use-package lsp-jedi
+(use-package py-isort
   :ensure t)
+
+(use-package lsp-pyright
+  :ensure t
+  :after lsp-mode
+  :hook
+  (python-mode . (lambda () (require 'lsp-pyright) (lsp-deferred)))
+  :custom
+  (lsp-pyright-auto-import-completions nil)
+  (lsp-pyright-typechecking-mode "off")
+  :config
+  (fk/async-process
+   "npm outdated -g | grep pyright | wc -l" nil
+   (lambda (process output)
+     (pcase output
+       ("0\n" (message "Pyright is up to date."))
+       ("1\n" (message "A pyright update is available."))))))
 
 (use-package dockerfile-mode
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+
+(use-package poetry
+  :ensure t
+  :hook
+  (python-mode . poetry-tracking-mode))
 
 (use-package docker-compose-mode
   :ensure t)
@@ -235,6 +259,9 @@
   :mode
   ("\\.graphqls\\'" . graphql-mode))
 
+(use-package go-add-tags
+  :ensure t)
+
 (use-package ivy
   :ensure t
   :defer 0.1
@@ -267,13 +294,14 @@
 
 
 ;; Personal Config
-(load-theme 'doom-molokai)
+(load-theme 'sanityinc-tomorrow-eighties)
 (set-frame-font "JetBrains Mono Bold 12" nil t)
 
 ;; Keybindings
 (global-set-key (kbd "C-;") 'avy-goto-char-2)
 (global-set-key (kbd "C-x .") 'find-file-at-point)
 (global-set-key (kbd "C-x C-d") 'dired)
+(global-set-key (kbd "C-c /") 'counsel-projectile-find-file)
 ;; Font size
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -282,8 +310,6 @@
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-
-(setq display-fill-column-indicator nil)
 
 (setq wttrin-default-cities '("Florianopolis" "Sao Paulo" "Ribeirao Preto"))
 
@@ -315,5 +341,18 @@
 
 (add-hook 'js2-mode-hook (lambda ()
                            (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))))
+
+(setq projectile-enable-caching t)
+(setq projectile-indexing-method 'native)
+
+(setq display-fill-column-indicator nil)
+(setq display-fill-column-indicator-column nil)
+
+(define-key global-map (kbd "RET") 'newline)
+
+(with-eval-after-load 'go-mode
+  (define-key go-mode-map (kbd "C-c t") #'go-add-tags))
+
+(add-hook 'before-save-hook 'py-isort-before-save)
 
 (provide 'init-local)
