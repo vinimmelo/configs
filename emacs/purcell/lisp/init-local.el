@@ -33,12 +33,11 @@
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (go-mode . lsp-deferred)
+  :hook ((go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration)
          (js2-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
-         (web-mode . lsp-deferred))
+         (web-mode . lsp-deferred)
+         (ruby-mode . lsp-deferred))
   :commands (lsp lsp-deferred))
 
 (use-package ace-jump-mode
@@ -52,9 +51,9 @@
         doom-themes-enable-italic t))
 
 (use-package sml-mode
- :ensure t
- :init
- (add-to-list 'auto-mode-alist '("\\.\\(sml\\|sig\\)\\'" . sml-mode)))
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.\\(sml\\|sig\\)\\'" . sml-mode)))
 
 (use-package doom-modeline
   :ensure t
@@ -67,6 +66,50 @@
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
   (setq doom-modeline-major-mode-color-icon t)
   (setq doom-modeline-enable-word-count t))
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init)
+  (evil-global-set-key 'normal "s" 'avy-goto-char-2)
+  (evil-global-set-key 'normal "S" 'avy-goto-char-2))
+
+(use-package evil-surround
+  :after evil
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-nerd-commenter
+  :after evil
+  :ensure t
+  :config
+  (evilnc-default-hotkeys nil t)
+  (evil-global-set-key 'normal "gc" 'evilnc-comment-or-uncomment-lines))
+
+(use-package evil-snipe
+  :after evil
+  :ensure t
+  :config
+  (evil-snipe-override-mode 1))
+
+(use-package vimish-fold
+  :ensure
+  :after evil)
+
+(use-package evil-vimish-fold
+  :after vimish-fold
+  :ensure
+  :hook ((prog-mode conf-mode text-mode) . evil-vimish-fold-mode))
 
 (use-package polymode
   :ensure t)
@@ -92,7 +135,7 @@
   :hook
   (org-mode . org-fancy-priorities-mode)
   :config
-  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+  (setq org-fancy-priorities-list '("‚ö°" "‚¨Ü" "‚¨á" "‚òï")))
 
 (use-package prescient
   :ensure t)
@@ -162,39 +205,12 @@
   :bind
   ("C-c p" . projectile-mode-map))
 
-(use-package blacken
-  :ensure t
-  :hook (python-mode . blacken-mode))
-
-(use-package py-isort
-  :ensure t)
-
-(use-package lsp-pyright
-  :ensure t
-  :after lsp-mode
-  :hook
-  (python-mode . (lambda () (require 'lsp-pyright) (lsp-deferred)))
-  :custom
-  (lsp-pyright-auto-import-completions nil)
-  (lsp-pyright-typechecking-mode "off")
-  :config
-  (fk/async-process
-   "npm outdated -g | grep pyright | wc -l" nil
-   (lambda (process output)
-     (pcase output
-       ("0\n" (message "Pyright is up to date."))
-       ("1\n" (message "A pyright update is available."))))))
-
 (use-package dockerfile-mode
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
-(use-package poetry
-  :ensure t
-  :hook
-  (python-mode . poetry-tracking-mode))
-
+;; test
 (use-package docker-compose-mode
   :ensure t)
 
@@ -215,6 +231,7 @@
         '(("django" . "focus/.*\\.html\\'")
           ("ctemplate" . "realtimecrm/.*\\.html\\'"))))
 
+
 (use-package js2-mode
   :ensure t
   :init
@@ -229,7 +246,7 @@
 
   (add-hook 'js2-mode-hook
             (lambda ()
-              (push '("function" . ?ƒ) prettify-symbols-alist)))
+              (push '("function" . ?∆í) prettify-symbols-alist)))
 
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 
@@ -294,10 +311,15 @@
 
 
 ;; Personal Config
-(load-theme 'sanityinc-tomorrow-eighties)
-(set-frame-font "JetBrains Mono Bold 12" nil t)
+(load-theme 'doom-challenger-deep)
+(set-face-attribute 'default nil
+                    :family "JetBrains Mono"
+                    :height 130
+                    :weight 'normal
+                    :width 'normal)
 
 ;; Keybindings
+(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?c ?v ?b ?n ?m ?r ?t ?u ?i ?o))
 (global-set-key (kbd "C-;") 'avy-goto-char-2)
 (global-set-key (kbd "C-x .") 'find-file-at-point)
 (global-set-key (kbd "C-x C-d") 'dired)
@@ -354,5 +376,4 @@
   (define-key go-mode-map (kbd "C-c t") #'go-add-tags))
 
 (add-hook 'before-save-hook 'py-isort-before-save)
-
 (provide 'init-local)
