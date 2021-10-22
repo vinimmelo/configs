@@ -79,9 +79,14 @@
   :after evil
   :ensure t
   :config
+  ;; Evil/Vim keybindings
+  (evil-set-leader 'normal (kbd "SPC"))
   (evil-collection-init)
   (evil-global-set-key 'normal "s" 'avy-goto-char-2)
-  (evil-global-set-key 'normal "S" 'avy-goto-char-2))
+  (evil-global-set-key 'normal "S" 'avy-goto-char-2)
+  (evil-global-set-key 'normal (kbd "<leader>b") 'switch-to-buffer)
+  (evil-global-set-key 'normal (kbd "<leader>/") 'counsel-projectile-find-file)
+  (evil-global-set-key 'normal (kbd "<leader>p") 'projectile-command-map))
 
 (use-package evil-surround
   :after evil
