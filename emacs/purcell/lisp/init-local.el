@@ -86,7 +86,10 @@
   (evil-global-set-key 'normal "S" 'avy-goto-char-2)
   (evil-global-set-key 'normal (kbd "<leader>b") 'switch-to-buffer)
   (evil-global-set-key 'normal (kbd "<leader>/") 'counsel-projectile-find-file)
-  (evil-global-set-key 'normal (kbd "<leader>p") 'projectile-command-map))
+  (evil-global-set-key 'normal (kbd "<leader>p") 'projectile-command-map)
+  (evil-global-set-key 'normal (kbd "<leader>w") 'evil-window-map)
+  (evil-global-set-key 'normal (kbd "<leader>g") 'magit-status))
+
 
 (use-package evil-surround
   :after evil
