@@ -82,12 +82,17 @@
   ;; Evil/Vim keybindings
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-collection-init)
+  ;; Golang specific keybinding
+  (evil-define-key 'normal go-mode-map
+    (kbd "gD") 'godef-jump-other-window)
+  ;; Global Keybinding
   (evil-global-set-key 'normal "s" 'avy-goto-char-2)
   (evil-global-set-key 'normal "S" 'avy-goto-char-2)
   (evil-global-set-key 'normal (kbd "<leader>b") 'switch-to-buffer)
   (evil-global-set-key 'normal (kbd "<leader>/") 'counsel-projectile-find-file)
   (evil-global-set-key 'normal (kbd "<leader>p") 'projectile-command-map)
   (evil-global-set-key 'normal (kbd "<leader>w") 'evil-window-map)
+  (evil-global-set-key 'normal (kbd "<leader>B") 'switch-to-buffer-other-window)
   (evil-global-set-key 'normal (kbd "<leader>g") 'magit-status))
 
 
@@ -319,12 +324,10 @@
 
 
 ;; Personal Config
-(load-theme 'doom-challenger-deep)
-(set-face-attribute 'default nil
-                    :family "JetBrains Mono"
-                    :height 130
-                    :weight 'normal
-                    :width 'normal)
+(load-theme 'doom-horizon)
+
+;; If it's Linux
+;; (set-frame-font "JetBrains Mono Medium 11" nil t)
 
 ;; Keybindings
 (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?c ?v ?b ?n ?m ?r ?t ?u ?i ?o))
