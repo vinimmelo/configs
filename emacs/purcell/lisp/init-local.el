@@ -7,9 +7,17 @@
   (require 'use-package))
 
 ;; Packages
-(use-package neotree
-  :ensure t
-  :bind ([f8] . neotree-toggle))
+(use-package treemacs
+  :ensure
+  :bind ([f8] . treemacs))
+
+(use-package treemacs-evil
+  :ensure
+  :after (treemacs evil))
+
+(use-package treemacs-projectile
+  :ensure
+  :after (treemacs projectile))
 
 (use-package wttrin
   :ensure t
@@ -50,6 +58,11 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
+(use-package kaolin-themes
+  :ensure
+  :config
+  (kaolin-treemacs-theme))
+
 (use-package sml-mode
   :ensure t
   :init
@@ -88,12 +101,21 @@
   ;; Global Keybinding
   (evil-global-set-key 'normal "s" 'avy-goto-char-2)
   (evil-global-set-key 'normal "S" 'avy-goto-char-2)
+  (evil-ex-define-cmd "bd[elete]" 'kill-buffer)
+  (evil-global-set-key 'normal (kbd "C-u") 'evil-scroll-up)
+  (evil-global-set-key 'normal (kbd "<leader>k") 'counsel-ag)
+  (evil-global-set-key 'normal (kbd "<leader>d") 'dired)
+  (evil-global-set-key 'normal (kbd "<leader>.") 'find-file-at-point)
+  (evil-global-set-key 'normal (kbd "<leader>f") 'find-file)
   (evil-global-set-key 'normal (kbd "<leader>b") 'switch-to-buffer)
   (evil-global-set-key 'normal (kbd "<leader>/") 'counsel-projectile-find-file)
   (evil-global-set-key 'normal (kbd "<leader>p") 'projectile-command-map)
   (evil-global-set-key 'normal (kbd "<leader>w") 'evil-window-map)
   (evil-global-set-key 'normal (kbd "<leader>B") 'switch-to-buffer-other-window)
-  (evil-global-set-key 'normal (kbd "<leader>g") 'magit-status))
+  (evil-global-set-key 'normal (kbd "<leader>g") 'magit-status)
+  (evil-global-set-key 'normal (kbd "C-e") 'end-of-line)
+  (evil-global-set-key 'insert (kbd "C-a") 'beginning-of-line)
+  (evil-global-set-key 'insert (kbd "C-e") 'end-of-line))
 
 
 (use-package evil-surround
@@ -245,24 +267,6 @@
           ("ctemplate" . "realtimecrm/.*\\.html\\'"))))
 
 
-(use-package js2-mode
-  :ensure t
-  :init
-  (setq js-basic-indent 2)
-  (setq-default js2-basic-indent 2
-                js2-basic-offset 2
-                js2-auto-indent-p t
-                js2-cleanup-whitespace t
-                js2-enter-indents-newline t
-                js2-indent-on-enter-key t
-                js2-global-externs (list "window" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON" "jQuery" "$"))
-
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (push '("function" . ?∆í) prettify-symbols-alist)))
-
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
-
 (use-package js2-refactor
   :ensure t
   :init   (add-hook 'js2-mode-hook 'js2-refactor-mode)
@@ -324,10 +328,10 @@
 
 
 ;; Personal Config
-(load-theme 'doom-horizon)
+(load-theme 'kaolin-galaxy)
 
-;; If it's Linux
 ;; (set-frame-font "JetBrains Mono Medium 11" nil t)
+(set-face-attribute 'default nil :font "JetBrains Mono Medium" :height 110)
 
 ;; Keybindings
 (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?c ?v ?b ?n ?m ?r ?t ?u ?i ?o))
@@ -347,11 +351,6 @@
 (setq wttrin-default-cities '("Florianopolis" "Sao Paulo" "Ribeirao Preto"))
 
 (setq rspec-use-rvm t)
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Documents/todo.org" "Tasks")
-         "* TODO %t %?\n ")
-        ("n" "Note" entry (file+headline "~/Documents/notes.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
 
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
@@ -386,5 +385,4 @@
 (with-eval-after-load 'go-mode
   (define-key go-mode-map (kbd "C-c t") #'go-add-tags))
 
-(add-hook 'before-save-hook 'py-isort-before-save)
 (provide 'init-local)
