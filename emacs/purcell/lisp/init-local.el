@@ -114,8 +114,8 @@
   (evil-global-set-key 'normal (kbd "<leader>B") 'switch-to-buffer-other-window)
   (evil-global-set-key 'normal (kbd "<leader>g") 'magit-status)
   (evil-global-set-key 'normal (kbd "C-e") 'end-of-line)
-  (evil-global-set-key 'insert (kbd "C-a") 'beginning-of-line)
-  (evil-global-set-key 'insert (kbd "C-e") 'end-of-line))
+  (setcdr evil-insert-state-map nil)
+  (define-key evil-insert-state-map [escape] 'evil-normal-state))
 
 
 (use-package evil-surround
