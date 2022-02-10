@@ -36,7 +36,6 @@ Plug 'tpope/vim-rails' " rails
 Plug 'vim-ruby/vim-ruby' " ruby
 Plug 'vim-utils/vim-ruby-fold' "fold
 Plug 'vim-scripts/rainbow-end'
-Plug 'valloric/youcompleteme'
 Plug 'easymotion/vim-easymotion' " move everywhere
 Plug 'mileszs/ack.vim' " search easily
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " vim with go
