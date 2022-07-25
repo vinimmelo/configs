@@ -1,4 +1,0 @@
-# key: pln
-# name: Print New Line
-# --
-fmt.Println($1)

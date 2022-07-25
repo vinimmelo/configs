@@ -1,4 +1,0 @@
-# key: print
-# name: print ln
-# --
-fmt.Println($1)
