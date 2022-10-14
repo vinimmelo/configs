@@ -1,0 +1,5 @@
+return {
+  theme = {
+    name = "ayu"
+  }
+}
