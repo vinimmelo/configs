@@ -9,4 +9,7 @@ cmap <esc>OF <end>
 imap <C-o> <esc>o
 
 set wrap linebreak
+set relativenumber
+" map <C-w> <Nop>
 
+nnoremap <leader>w <C-w>
